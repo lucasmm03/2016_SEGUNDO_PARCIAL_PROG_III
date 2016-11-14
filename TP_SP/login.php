@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>APELLIDO Y NOMBRE DEL ALUMNO</title>
+	<title>MASCHERONI, LUCAS MARTÍN</title>
 	  
         <meta charset="UTF-8">
         <!-- jQuery library -->
@@ -37,3 +37,12 @@
 	</div>
 </body>
 </html>
+<!--
+<script type="text/javascript">
+function Login() {
+
+		//IMPLEMENTAR...
+		alert("hola");
+
+}
+</script>-->

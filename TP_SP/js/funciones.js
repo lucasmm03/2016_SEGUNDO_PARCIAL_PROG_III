@@ -1,7 +1,22 @@
 function Logout() {//#2
 
 		//IMPLEMENTAR...
+		$.ajax({
+			type: "POST",
+			url: "./administracion.php",
+			dataType: "text",
+			data: {
+				queMuestro : "2"
+			}
+		})
+		.done(function(resultado)
+		{
+			alert(resultado);
+		})
+		.fail(function()
+		{
 
+		})
 }
 function MostrarGrilla() {//#3
 		//IMPLEMENTAR...
