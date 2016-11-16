@@ -21,8 +21,8 @@
 			<h1>LOGIN</h1>
 
 			<form id="FormIngreso" method="post">
-				<input type="text" id="email" placeholder="E-mail" value="" />
-				<input type="password" id="password" placeholder="Password" value="" />
+				<input type="text" id="email" placeholder="E-mail" value="admin@admin.com" />
+				<input type="password" id="password" placeholder="Password" value="123456" />
 
 				<input type="button" class="btn btn-danger" value="LOGIN" onclick="Login()" />
 			</form>
@@ -37,12 +37,3 @@
 	</div>
 </body>
 </html>
-<!--
-<script type="text/javascript">
-function Login() {
-
-		//IMPLEMENTAR...
-		alert("hola");
-
-}
-</script>-->

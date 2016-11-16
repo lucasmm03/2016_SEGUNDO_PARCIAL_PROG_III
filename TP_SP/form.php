@@ -1,5 +1,6 @@
 <?php
-//IMPLEMENTAR...
+//IMPLEMENTAR...OK
+require_once ("./verificar_sesion.php");
 ?>
 <div id="divFrm" class="animated bounceInLeft" style="height:330px;overflow:auto;margin-top:0px;border-style:solid">
     <input type="hidden" id="hdnIdUsuario" value="<?php //IMPLEMENTAR... ?>" />

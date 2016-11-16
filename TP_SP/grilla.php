@@ -1,5 +1,8 @@
 <?php
-//IMPLEMENTAR...
+//IMPLEMENTAR...OK
+require_once ("./verificar_sesion.php");
+$objUser = Usuario::TraerUsuarioLogueado($_SESSION["Usuario"]);
+$allUsers = Usuario::TraerTodosLosUsuarios();
 ?>
 <div class="animated bounceInRight" style="height:460px;overflow:auto;border-style:solid" >
     <table class="table">
@@ -13,7 +16,29 @@
             </tr> 
         </thead>   	
         <?php
-		//IMPLEMENTAR...        
+		//IMPLEMENTAR...OK
+        foreach ($allUsers as $unUsuario)
+        {
+            echo "<tr>
+                    <td>".$unUsuario["nombre"]."</td>
+                    <td>".$unUsuario["email"]."</td>
+                    <td>".$unUsuario["perfil"]."</td>
+                    <td><img src='./fotos/".$unUsuario["foto"]."' width='80px' height='80px' /></td>";
+                    if ($objUser->perfil == "administrador")
+                    {
+                        echo "<td>
+                                <input type='button' class='MiBotonUTN' onclick='ModificarUsuario()' value='Modificar' />
+                                <input type='button' class='MiBotonUTN' onclick='EliminarUsuario()' value='Eliminar' />
+                            </td>";
+                    }
+                    if ($objUser->perfil == "usuario")
+                    {
+                        echo "<td>
+                                <input type='button' class='MiBotonUTN' onclick='ModificarUsuario()' value='Modificar' />
+                            </td>";
+                    }
+            echo "</tr>";
+        }
 		?>
 
     </table>

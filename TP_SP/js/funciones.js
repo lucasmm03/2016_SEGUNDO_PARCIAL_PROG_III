@@ -1,6 +1,6 @@
 function Logout() {//#2
 
-		//IMPLEMENTAR...
+		//IMPLEMENTAR...OK
 		$.ajax({
 			type: "POST",
 			url: "./administracion.php",
@@ -11,18 +11,42 @@ function Logout() {//#2
 		})
 		.done(function(resultado)
 		{
-			alert(resultado);
+			if (resultado == "LOGOUT")
+			{
+				window.location.href="login.php";
+			}
+			else
+			{
+				alert("Error al salir!!!");
+			}
 		})
 		.fail(function()
 		{
-
+			alert("Error!!!");
 		})
 }
 function MostrarGrilla() {//#3
 		//IMPLEMENTAR...
+		$.ajax({
+			type: "POST",
+			url: "./administracion.php",
+			dataType: "text",
+			data: {
+				queMuestro : "3"
+			}
+		})
+		.done(function(resultado)
+		{
+			$("#divGrilla").html(resultado);
+		})
+		.fail(function()
+		{
+			alert("Error!!!");
+		})
 }
 function Home() {//#3-sin case
-		//IMPLEMENTAR...
+		//IMPLEMENTAR...OK
+		window.location.href="principal.php";
 }
 function CargarFormUsuario() {//#4
 		//IMPLEMENTAR...
@@ -41,6 +65,22 @@ function EliminarUsuario() {//#7
 }
 function ModificarUsuario() {//#8
 		//IMPLEMENTAR...
+		$.ajax({
+			type: "POST",
+			url: "./administracion.php",
+			dataType: "text",
+			data: {
+				queMuestro : "8"
+			}
+		})
+		.done(function(resultado)
+		{
+			$("#divAbm").html(resultado);
+		})
+		.fail(function()
+		{
+			alert("Error!!!");
+		})
 }
 function ElegirTheme() {//#9
 		//IMPLEMENTAR...
