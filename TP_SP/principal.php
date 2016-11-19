@@ -24,8 +24,14 @@ $objUser = Usuario::TraerUsuarioLogueado($_SESSION["Usuario"]);
                 <?php
                 echo "<a class='btn btn-success animated bounceInLeft' href='#' onclick='Home()'><span class='glyphicon glyphicon-home'>&nbsp;</span>Home</a>";
                 echo "<a class='btn btn-default animated bounceInLeft' href='#' onclick='MostrarGrilla()'><span class='glyphicon glyphicon-th'>&nbsp;</span>Grilla&nbsp;</a>";
-				echo "<a class='btn btn-primary animated bounceInLeft' href='#' onclick='EditarUsuario()'><span class='glyphicon glyphicon-user'></span>Editar Perfil&nbsp;</a>";
-				echo "<a class='btn btn-info animated bounceInLeft' href='#' onclick='CargarFormUsuario()'><span class='glyphicon glyphicon-user'>&nbsp;</span><span class='glyphicon glyphicon-plus-sign'></span>Agregar Usuario&nbsp;</a>";
+                if ($objUser->perfil == "administrador" || $objUser->perfil == "usuario")
+                {
+                    echo "<a class='btn btn-primary animated bounceInLeft' href='#' onclick='CargarFormUsuario(4, ".$objUser->id.")'><span class='glyphicon glyphicon-user'></span>Editar Perfil&nbsp;</a>";
+                }
+                if ($objUser->perfil == "administrador")
+                {
+                    echo "<a class='btn btn-info animated bounceInLeft' href='#' onclick='CargarFormUsuario(3)'><span class='glyphicon glyphicon-user'>&nbsp;</span><span class='glyphicon glyphicon-plus-sign'></span>Agregar Usuario&nbsp;</a>";
+                }
 				echo "<a class='btn btn-warning animated bounceInLeft' href='#' onclick='ElegirTheme()'><span class='glyphicon glyphicon-pencil'>&nbsp;</span>Elegir Theme</a>";
 				echo "<a class='btn btn-danger animated bounceInLeft' href='#' onclick='Logout()'><span class='glyphicon glyphicon-off'></span>LogOut&nbsp;</a>";        	  
                 ?>

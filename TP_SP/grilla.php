@@ -27,14 +27,14 @@ $allUsers = Usuario::TraerTodosLosUsuarios();
                     if ($objUser->perfil == "administrador")
                     {
                         echo "<td>
-                                <input type='button' class='MiBotonUTN' onclick='ModificarUsuario()' value='Modificar' />
-                                <input type='button' class='MiBotonUTN' onclick='EliminarUsuario()' value='Eliminar' />
+                                <input type='button' class='MiBotonUTN' onclick='CargarFormUsuario(1,". $unUsuario["id"] .")' value='Modificar' />
+                                <input type='button' class='MiBotonUTN' onclick='CargarFormUsuario(2,". $unUsuario["id"] .")' value='Eliminar' />
                             </td>";
                     }
                     if ($objUser->perfil == "usuario")
                     {
                         echo "<td>
-                                <input type='button' class='MiBotonUTN' onclick='ModificarUsuario()' value='Modificar' />
+                                <input type='button' class='MiBotonUTN' onclick='CargarFormUsuario(1,". $unUsuario["id"] .")' value='Modificar' />
                             </td>";
                     }
             echo "</tr>";
