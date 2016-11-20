@@ -7,7 +7,8 @@ function Logout() {//#2
 			dataType: "text",
 			data: {
 				queMuestro : "2"
-			}
+			},
+			async: true
 		})
 		.done(function(resultado)
 		{
@@ -33,7 +34,8 @@ function MostrarGrilla() {//#3
 			dataType: "text",
 			data: {
 				queMuestro : "3"
-			}
+			},
+			async: true
 		})
 		.done(function(resultado)
 		{
@@ -78,7 +80,8 @@ function CargarFormUsuario(queHago = 0, idUsuario = 0) {//#4
 				queMuestro : "4",
 				queHago : queHago,
 				idUsuario : idUsuario
-			}
+			},
+			async: true
 		})
 		.done(function(resultado)
 		{
@@ -92,19 +95,30 @@ function CargarFormUsuario(queHago = 0, idUsuario = 0) {//#4
 }
 function SubirFoto() {//#5
 		//IMPLEMENTAR...OK
-		var imagen = $("#archivo").val();
+		var formData = new FormData();
+
+		var imagen = $("#archivo")[0];
+		formData.append("imagenASubir", imagen.files[0]);
+		formData.append("queMuestro", "5");
+		formData.append("fotoAnterior", $("#fotoTmp").attr("src"));
+		formData.append("idUsuario", $("#hdnIdUsuario").val());
+
 		$.ajax({
 			type: "POST",
 			url: "./administracion.php",
 			dataType: "text",
-			data: {
-				queMuestro : "5",
-				imagen : imagen
-			}
+			data: formData,
+			contentType: false,
+			processData: false,
+			async: true
 		})
 		.done(function(resultado)
 		{
-			if (resultado != "OK")
+			if (resultado.substring(0, 6) == "./tmp/")
+			{
+				$("#fotoTmp").attr("src", resultado);
+			}
+			else
 			{
 				alert(resultado);
 			}
@@ -128,7 +142,7 @@ function AgregarUsuario() {//#6
 			"email" : email,
 			"password" : password,
 			"perfil" : $("#cboPerfiles").val(),
-			"foto" : "pordefecto.jpg"
+			"foto" : ($("#fotoTmp").attr("src")).substring(6)
 		};
 		$.ajax({
 			type: "POST",
@@ -136,8 +150,9 @@ function AgregarUsuario() {//#6
 			dataType: "text",
 			data: {
 				queMuestro : "6",
-				usuarioAgregado : usuarioAgregado
-			}
+				usuarioAgregado : JSON.stringify(usuarioAgregado)
+			},
+			async: true
 		})
 		.done(function(resultado)
 		{
@@ -169,7 +184,7 @@ function EditarUsuario() {//#7 sin case
 			"email" : email,
 			"password" : password,
 			"perfil" : $("#cboPerfiles").val(),
-			"foto" : $("#archivo").val()
+			"foto" : ($("#fotoTmp").attr("src")).substring(6)
 		};
 		$.ajax({
 			type: "POST",
@@ -177,8 +192,9 @@ function EditarUsuario() {//#7 sin case
 			dataType: "text",
 			data: {
 				queMuestro : "8",
-				usuarioModificado : usuarioModificado
-			}
+				usuarioModificado : JSON.stringify(usuarioModificado)
+			},
+			async: true
 		})
 		.done(function(resultado)
 		{
@@ -238,7 +254,7 @@ function ModificarUsuario() {//#8
 			"email" : email,
 			"password" : password,
 			"perfil" : $("#cboPerfiles").val(),
-			"foto" : $("#archivo").val()
+			"foto" : ($("#fotoTmp").attr("src")).substring(6)
 		};
 		$.ajax({
 			type: "POST",
@@ -246,8 +262,9 @@ function ModificarUsuario() {//#8
 			dataType: "text",
 			data: {
 				queMuestro : "8",
-				usuarioModificado : usuarioModificado
-			}
+				usuarioModificado : JSON.stringify(usuarioModificado)
+			},
+			async: true
 		})
 		.done(function(resultado)
 		{
@@ -273,7 +290,8 @@ function ElegirTheme() {//#9
 			dataType: "text",
 			data: {
 				queMuestro : "9",
-			}
+			},
+			async: true
 		})
 		.done(function(resultado)
 		{
@@ -301,7 +319,8 @@ function GuardarTheme() {//#10
 			data: {
 				queMuestro : "10",
 				color : color
-			}
+			},
+			async: true
 		})
 		.done(function(resultado)
 		{
@@ -322,6 +341,7 @@ function GuardarTheme() {//#10
 function ValidarDatos(nombre, email, password) {
 		if (nombre.length == 0 || email.length == 0 || password.length < 6)
 		{
+			alert("Campos vacíos o la clave es muy corta (tiene que tener 6 o más caracteres)");
 			return false;
 		}
 		return true;
