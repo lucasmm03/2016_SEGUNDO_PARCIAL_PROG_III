@@ -2,6 +2,10 @@
 //IMPLEMENTAR...OK
 require_once ("./verificar_sesion.php");
 $objUser = Usuario::TraerUsuarioLogueado($_SESSION["Usuario"]);
+if (isset($_COOKIE["theme".$objUser->id]))
+{
+    $theme = "background:".$_COOKIE["theme".$objUser->id];
+}
 ?>
 <html>
     <head>
@@ -48,6 +52,9 @@ $objUser = Usuario::TraerUsuarioLogueado($_SESSION["Usuario"]);
 
             </div>
             <div id="divGrilla"  style='border-style:none;float:right;width:70%'>
+
+            </div>
+            <div id="divGrillaTheme"  style='width:100%'>
 
             </div>
         </div>

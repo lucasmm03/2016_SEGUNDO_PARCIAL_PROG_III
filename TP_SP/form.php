@@ -28,8 +28,8 @@ $usuarioEnSesion = json_decode($_SESSION["Usuario"]);
 ?>
 <div id="divFrm" class="animated bounceInLeft" style="height:330px;overflow:auto;margin-top:0px;border-style:solid">
     <input type="hidden" id="hdnIdUsuario" value="<?php /*IMPLEMENTAR...OK*/echo $usuario->id; ?>" />
-    <input type="text" placeholder="Nombre" id="txtNombre" value="<?php /*IMPLEMENTAR...OK*/echo $usuario->nombre; ?>" <?php if ($usuarioEnSesion->perfil != "administrador" || $_POST["queHago"] == "Eliminar") { echo "readonly"; }?> />
-    <input type="text" placeholder="E-mail" id="txtEmail" value="<?php /*IMPLEMENTAR...OK*/echo $usuario->email; ?>" <?php if ($usuarioEnSesion->perfil != "administrador" || $_POST["queHago"] == "Eliminar") { echo "readonly"; }?> />
+    <input type="text" placeholder="Nombre" id="txtNombre" value="<?php /*IMPLEMENTAR...OK*/echo $usuario->nombre; ?>" <?php if (($_POST["queHago"] != "Editar" && $usuarioEnSesion->perfil != "administrador") || $_POST["queHago"] == "Eliminar") { echo "readonly"; }?> />
+    <input type="text" placeholder="E-mail" id="txtEmail" value="<?php /*IMPLEMENTAR...OK*/echo $usuario->email; ?>" <?php if (($_POST["queHago"] != "Editar" && $usuarioEnSesion->perfil != "administrador") || $_POST["queHago"] == "Eliminar") { echo "readonly"; }?> />
     <input type="password" placeholder="Password" id="txtPassword" value="<?php /*IMPLEMENTAR...OK*/echo $usuario->password; ?>" <?php if ($_POST["queHago"] == "Eliminar") { echo "readonly"; }?> />
 
     <span>Perfil</span>
@@ -81,10 +81,10 @@ $usuarioEnSesion = json_decode($_SESSION["Usuario"]);
                                                             echo 'Eliminar';
                                                             break;
                                                         case 'Agregar':
-                                                            echo 'Agregar';
+                                                            echo 'Guardar';
                                                             break;
                                                         case 'Editar':
-                                                            echo 'Editar';
+                                                            echo 'Editar Perfil';
                                                             break;
                                                         default:
                                                             break;

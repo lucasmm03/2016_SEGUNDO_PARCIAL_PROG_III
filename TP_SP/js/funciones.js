@@ -37,6 +37,7 @@ function MostrarGrilla() {//#3
 		})
 		.done(function(resultado)
 		{
+			$("#divGrillaTheme").html("");
 			$("#divGrilla").html(resultado);
 		})
 		.fail(function()
@@ -81,6 +82,7 @@ function CargarFormUsuario(queHago = 0, idUsuario = 0) {//#4
 		})
 		.done(function(resultado)
 		{
+			$("#divGrillaTheme").html("");
 			$("#divAbm").html(resultado);
 		})
 		.fail(function()
@@ -155,7 +157,44 @@ function AgregarUsuario() {//#6
 }
 function EditarUsuario() {//#7 sin case
 		//IMPLEMENTAR...
-
+		var nombre = $("#txtNombre").val();
+		var email = $("#txtEmail").val();
+		var password = $("#txtPassword").val();
+		if (!ValidarDatos(nombre, email, password))
+		{
+			return;
+		}
+		var usuarioModificado = {
+			"nombre" : nombre,
+			"email" : email,
+			"password" : password,
+			"perfil" : $("#cboPerfiles").val(),
+			"foto" : $("#archivo").val()
+		};
+		$.ajax({
+			type: "POST",
+			url: "./administracion.php",
+			dataType: "text",
+			data: {
+				queMuestro : "8",
+				usuarioModificado : usuarioModificado
+			}
+		})
+		.done(function(resultado)
+		{
+			if (resultado == "OK")
+			{
+				alert("Perfil editado!!!");
+			}
+			else
+			{
+				alert("No se pudo editar el perfil");
+			}
+		})
+		.fail(function()
+		{
+			alert("Error!!!");
+		})		
 }
 function EliminarUsuario() {//#7
 		//IMPLEMENTAR...
@@ -227,13 +266,58 @@ function ModificarUsuario() {//#8
 		})		
 }
 function ElegirTheme() {//#9
-		//IMPLEMENTAR...
+		//IMPLEMENTAR...OK
+		$.ajax({
+			type: "POST",
+			url: "./administracion.php",
+			dataType: "text",
+			data: {
+				queMuestro : "9",
+			}
+		})
+		.done(function(resultado)
+		{
+			$("#divAbm").html("");
+			$("#divGrilla").html("");
+			$("#divGrillaTheme").html(resultado);
+		})
+		.fail(function()
+		{
+			alert("Error!!!");
+		})		
 }
 function AplicarTheme(radio) {//sin case
-		//IMPLEMENTAR...
+		//IMPLEMENTAR...OK
+		var color = $("#" + radio).val();
+		$("#miBody").css("background-color", color);
 }
 function GuardarTheme() {//#10
 		//IMPLEMENTAR...
+		var color = $("#miBody").css("background-color");
+		$.ajax({
+			type: "POST",
+			url: "./administracion.php",
+			dataType: "text",
+			data: {
+				queMuestro : "10",
+				color : color
+			}
+		})
+		.done(function(resultado)
+		{
+			if (resultado == "OK")
+			{
+				alert("Tema guardado!!!");
+			}
+			else
+			{
+				alert("No se pudo guardar el tema");
+			}
+		})
+		.fail(function()
+		{
+			alert("Error!!!");
+		})		
 }
 function ValidarDatos(nombre, email, password) {
 		if (nombre.length == 0 || email.length == 0 || password.length < 6)
