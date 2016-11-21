@@ -65,20 +65,28 @@ class Usuario {
 
     public static function Modificar($obj) {
 		//IMPLEMENTAR...OK
-        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        try
+        {
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         
-        $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET nombre = :nombre, email = :email, 
-                                                        password = :password, perfil = :perfil,
-                                                        foto = :foto WHERE id = :id");
-        
-        $consulta->bindValue(':id', $obj->id, PDO::PARAM_INT);
-        $consulta->bindValue(':nombre', $obj->nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':email', $obj->email, PDO::PARAM_STR);
-        $consulta->bindValue(':password', $obj->password, PDO::PARAM_STR);
-        $consulta->bindValue(':perfil', $obj->perfil, PDO::PARAM_STR);
-        $consulta->bindValue(':foto', $obj->foto, PDO::PARAM_STR);
+            $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET nombre = :nombre, email = :email, 
+                                                            password = :password, perfil = :perfil,
+                                                            foto = :foto WHERE id = :id");
+            
+            $consulta->bindValue(':id', $obj->id, PDO::PARAM_INT);
+            $consulta->bindValue(':nombre', $obj->nombre, PDO::PARAM_STR);
+            $consulta->bindValue(':email', $obj->email, PDO::PARAM_STR);
+            $consulta->bindValue(':password', $obj->password, PDO::PARAM_STR);
+            $consulta->bindValue(':perfil', $obj->perfil, PDO::PARAM_STR);
+            $consulta->bindValue(':foto', $obj->foto, PDO::PARAM_STR);
 
-        return $consulta->execute();
+            $consulta->execute();
+        }
+        catch (Exception $e)
+        {
+            return false;
+        }
+        return true;
     }
 
     public static function TraerTodosLosUsuarios() {

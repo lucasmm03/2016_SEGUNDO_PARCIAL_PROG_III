@@ -30,13 +30,13 @@ $usuarioEnSesion = json_decode($_SESSION["Usuario"]);
     <input type="hidden" id="hdnIdUsuario" value="<?php /*IMPLEMENTAR...OK*/echo $usuario->id; ?>" />
     <input type="text" placeholder="Nombre" id="txtNombre" value="<?php /*IMPLEMENTAR...OK*/echo $usuario->nombre; ?>" <?php if (($_POST["queHago"] != "Editar" && $usuarioEnSesion->perfil != "administrador") || $_POST["queHago"] == "Eliminar") { echo "readonly"; }?> />
     <input type="text" placeholder="E-mail" id="txtEmail" value="<?php /*IMPLEMENTAR...OK*/echo $usuario->email; ?>" <?php if (($_POST["queHago"] != "Editar" && $usuarioEnSesion->perfil != "administrador") || $_POST["queHago"] == "Eliminar") { echo "readonly"; }?> />
-    <input type="password" placeholder="Password" id="txtPassword" value="<?php /*IMPLEMENTAR...OK*/echo $usuario->password; ?>" <?php if ($_POST["queHago"] == "Eliminar") { echo "readonly"; }?> />
+    <input type="password" placeholder="Password" id="txtPassword" value="<?php /*IMPLEMENTAR...OK*/echo $usuario->password; ?>" <?php if ($_POST["queHago"] != "Editar" && $_POST["queHago"] != "Agregar") { echo "readonly"; }?> />
 
     <span>Perfil</span>
-    <select id="cboPerfiles" <?php if ($usuarioEnSesion->perfil != "administrador" || $_POST["queHago"] == "Eliminar") { echo "disabled"; }?> >
+    <select id="cboPerfiles" <?php if ($_POST["queHago"] != "Editar" && $usuarioEnSesion->perfil != "administrador" || $_POST["queHago"] == "Eliminar") { echo "disabled"; }?> >
         <?php
 		//IMPLEMENTAR...OK
-        echo "<option "; if($usuario->perfil == "administrador")echo "selected"; echo ">administrador</option>
+        echo "<option "; if($usuario->perfil == "administrador")echo "selected"; if($usuarioEnSesion->perfil != "administrador")echo "disabled"; echo ">administrador</option>
             <option "; if($usuario->perfil == "usuario")echo "selected"; echo ">usuario</option>
             <option "; if($usuario->perfil == "invitado")echo "selected"; echo ">invitado</option>";
 		?>	

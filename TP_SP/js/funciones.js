@@ -137,12 +137,23 @@ function AgregarUsuario() {//#6
 		{
 			return;
 		}
+		if (($("#fotoTmp").attr("src")).substring(0, 6) == "./tmp/")
+		{
+			var foto = ($("#fotoTmp").attr("src")).substring(6);	//saco de tmp
+			var origenFoto = "tmp";
+		}
+		else
+		{
+			var foto = "pordefecto.jpg";
+			var origenFoto = "porDefecto";
+		}
 		var usuarioAgregado = {
+			"id" : $("#hdnIdUsuario").val(),
 			"nombre" : nombre,
 			"email" : email,
 			"password" : password,
 			"perfil" : $("#cboPerfiles").val(),
-			"foto" : ($("#fotoTmp").attr("src")).substring(6)
+			"foto" : foto
 		};
 		$.ajax({
 			type: "POST",
@@ -150,6 +161,7 @@ function AgregarUsuario() {//#6
 			dataType: "text",
 			data: {
 				queMuestro : "6",
+				origenFoto : origenFoto,
 				usuarioAgregado : JSON.stringify(usuarioAgregado)
 			},
 			async: true
@@ -158,6 +170,7 @@ function AgregarUsuario() {//#6
 		{
 			if (resultado == "OK")
 			{
+				Home();
 				alert("Usuario agregado!!!");
 			}
 			else
@@ -179,12 +192,23 @@ function EditarUsuario() {//#7 sin case
 		{
 			return;
 		}
+		if (($("#fotoTmp").attr("src")).substring(0, 6) == "./tmp/")
+		{
+			var foto = ($("#fotoTmp").attr("src")).substring(6);	//saco de tmp
+			var origenFoto = "tmp";
+		}
+		else if(($("#fotoTmp").attr("src")).substring(0, 8) == "./fotos/")
+		{
+			var foto = ($("#fotoTmp").attr("src")).substring(8);	//saco de fotos
+			var origenFoto = "fotos";
+		}
 		var usuarioModificado = {
+			"id" : $("#hdnIdUsuario").val(),
 			"nombre" : nombre,
 			"email" : email,
 			"password" : password,
 			"perfil" : $("#cboPerfiles").val(),
-			"foto" : ($("#fotoTmp").attr("src")).substring(6)
+			"foto" : foto
 		};
 		$.ajax({
 			type: "POST",
@@ -192,6 +216,7 @@ function EditarUsuario() {//#7 sin case
 			dataType: "text",
 			data: {
 				queMuestro : "8",
+				origenFoto : origenFoto,
 				usuarioModificado : JSON.stringify(usuarioModificado)
 			},
 			async: true
@@ -200,6 +225,7 @@ function EditarUsuario() {//#7 sin case
 		{
 			if (resultado == "OK")
 			{
+				Home();
 				alert("Perfil editado!!!");
 			}
 			else
@@ -228,6 +254,7 @@ function EliminarUsuario() {//#7
 		{
 			if (resultado == "OK")
 			{
+				Home();
 				alert("Usuario eliminado!!!");
 			}
 			else
@@ -249,12 +276,23 @@ function ModificarUsuario() {//#8
 		{
 			return;
 		}
+		if (($("#fotoTmp").attr("src")).substring(0, 6) == "./tmp/")
+		{
+			var foto = ($("#fotoTmp").attr("src")).substring(6);	//saco de tmp
+			var origenFoto = "tmp";
+		}
+		else if(($("#fotoTmp").attr("src")).substring(0, 8) == "./fotos/")
+		{
+			var foto = ($("#fotoTmp").attr("src")).substring(8);	//saco de fotos
+			var origenFoto = "fotos";
+		}
 		var usuarioModificado = {
+			"id" : $("#hdnIdUsuario").val(),
 			"nombre" : nombre,
 			"email" : email,
 			"password" : password,
 			"perfil" : $("#cboPerfiles").val(),
-			"foto" : ($("#fotoTmp").attr("src")).substring(6)
+			"foto" : foto
 		};
 		$.ajax({
 			type: "POST",
@@ -262,6 +300,7 @@ function ModificarUsuario() {//#8
 			dataType: "text",
 			data: {
 				queMuestro : "8",
+				origenFoto : origenFoto,
 				usuarioModificado : JSON.stringify(usuarioModificado)
 			},
 			async: true
@@ -270,6 +309,7 @@ function ModificarUsuario() {//#8
 		{
 			if (resultado == "OK")
 			{
+				Home();
 				alert("Usuario modificado!!!");
 			}
 			else
